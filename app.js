@@ -1,12 +1,20 @@
-//GET MODULES, FILES, AND SET UP SERVER/////////
+//GET MODULES, DATABASE, AND SET UP SERVER/////////
 //get and execute express 
 const express = require('express');
 const app = express();
 const exphbr = require('express-handlebars');
+const mongoose = require('mongoose');
 const port = 3000;
 
+//connect to mongodb and store connection status
+mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection
+//show success and handle failures
+db.on('error', () => console.log('mongodb error!'));
+db.once('open', () => console.log('mongodb connected!'));
+
 //set template engine
-app.engine('hbs', exphbr({ defaultLayout: 'main', extname: ".hbs" }))
+app.engine('hbs', exphbr({ defaultLayout: 'main', extname: ".hbs" }));
 app.set('view engine', 'hbs');
 
 //set up static files to access bootstrap and other designs
