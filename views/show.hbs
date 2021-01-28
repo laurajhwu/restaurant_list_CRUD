@@ -2,7 +2,17 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-10 mx-auto">
-
+            <div class="text-right">
+                <a href="/restaurants/{{ restaurant._id }}/edit" class="text-decoration-none">
+                    <button type="button" class="btn btn-warning btn-sm mb-3">編輯</button>
+                </a>
+                <a href="/restaurants/new">
+                    <button type="button" class="btn btn-secondary btn-sm mb-3 mx-2">新增餐廳</button>
+                </a>
+                <a href="/">
+                    <button type="button" class="btn btn-link btn-sm mb-3 mx-2">首頁</button>
+                </a>
+            </div>
             <p class="mb-1">
                 <span class="text-secondary">
                     <i class="fas fa-utensils pr-2"></i>

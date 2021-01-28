@@ -1,0 +1,94 @@
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h5 class="card-title">新增餐廳<i class="fas fa-utensils px-2"></i></h5>
+                        <small class="text-muted form-text px-2"><em>'*'為必填資料</em></small>
+                    </div>
+                    <hr>
+                    <form action="/restaurants" method="POST" id="new-form">
+                        <div class="form-group form-row">
+                            <label for="name" class="col-md-4 col-form-label">餐廳名字*</label>
+                            <div class="col-md-8">
+                                <input type="text" name="name" class="form-control" id="name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row">
+                            <label for="name_en" class="col-md-4 col-form-label">餐廳英文名字</label>
+                            <div class="col-md-8">
+                                <input type="text" name="name_en" class="form-control" id="name_en">
+                                <small class="text-muted form-text">若無則不需填</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row mb-2 align-items-center">
+                            <label for="category" class="col-md-4 col-form-label">餐廳類別*</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="category" name="category" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row mb-2 align-items-center">
+                            <label for="image" class="col-md-4 col-form-label">餐廳圖片連結*</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="image" name="image" placeholder="http://..."
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row mb-2 align-items-center">
+                            <label for="location" class="col-md-4 col-form-label">餐廳地址*</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="location" name="location" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row mb-2 align-items-center">
+                            <label for="phone" class="col-md-4 col-form-label">餐廳聯絡電話*</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                    placeholder="02 #### ####" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row mb-2 align-items-center">
+                            <label for="google_map" class="col-md-4 col-form-label">Google地圖連結</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="google_map" name="google_map">
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row mb-2 align-items-center">
+                            <label for="rating" class="col-md-4 col-form-label">評分*</label>
+                            <div class="col-md-8">
+                                <input type="number" class="form-control" id="rating" name="rating" min="0" max="5"
+                                    step="0.1" required>
+                                <small class="text-muted form-text">介於0.0 ~ 5.0</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row mb-2">
+                            <label for="description"
+                                class="col-md-4 col-form-label align-self-baseline">請簡單描述該餐廳*</label>
+                            <div class="col-md-8">
+                                <textarea name="description" id="description" form="new-form" cols="54" rows="9"
+                                    class="border border-secondary rounded" required></textarea>
+                                {{!-- <input type="text" class="form-control" id="description" name="description"
+                                    style="height: 100px;"> --}}
+                            </div>
+                        </div>
+                        <div class='d-flex justify-content-end'>
+                            <button class="btn btn-outline-dark mt-2" type="submit">+新增餐廳</button>
+                            <a href="/" class='align-self-end'>
+                                <button type="button" class="btn btn-link btn-mb mx-2">取消</button>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

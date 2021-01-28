@@ -4,11 +4,11 @@ const restaurantSchema = new Schema({
     name: { type: String, required: true },
     name_en: String,
     category: { type: String, required: true },
-    image: String,
+    image: { type: String, required: true },
     location: { type: String, required: true },
     phone: { type: String, required: true },
     google_map: String,
-    rating: { type: String, required: true },
+    rating: { type: Number, required: true },
     description: { type: String, required: true }
 })
 
