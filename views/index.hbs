@@ -27,9 +27,9 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-10 col-12 mx-auto">
-
             <div class="card-columns">
                 {{#each restaurants}}
+                {{!-- --}}
                 <div class="card mb-3">
                     <a href="/restaurants/{{ this._id }}" class="text-secondary"></a>
                     <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}">
@@ -40,21 +40,22 @@
                         <div class="restaurant-category mb-1">
                             <i class="fas fa-utensils pr-2"></i> {{ this.category }}
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="badge badge-pill badge-danger font-weight-normal h-50">
-                                {{ this.rating }}
-                                <i class="fas fa-star fa-xs"></i>
-                            </div>
-                            <div class="align-self-center">
-                                <a href="./restaurants/{{ this._id }}" class="text-secondary text-decoration-none">
-                                    <button type=" button" class="btn btn-outline-success btn-sm">關於</button>
-                                </a>
 
-                                <a href="./restaurants/{{ this._id }}/edit">
-                                    <button type="button"
-                                        class="btn btn-outline-warning btn-sm text-right mx-2">編輯</button>
-                                </a>
-                            </div>
+                        <div class="badge badge-pill badge-danger font-weight-normal h-50">
+                            {{ this.rating }}
+                            <i class="fas fa-star fa-xs"></i>
+                        </div>
+                        <div class=" d-flex align-items-center mt-1">
+                            <a href="./restaurants/{{ this._id }}" class="text-decoration-none">
+                                <button type="button" class="btn btn-outline-success btn-sm">關於</button>
+                            </a>
+
+                            <a href="./restaurants/{{ this._id }}/edit">
+                                <button type="button" class="btn btn-outline-warning btn-sm text-right mx-2">編輯</button>
+                            </a>
+                            <form action="./restaurants/{{ this._id }}/delete" method="POST" class="d-inline">
+                                <button type="submit" class="btn"><i class="fas fa-trash-alt"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>
