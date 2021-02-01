@@ -43,5 +43,4 @@ $ npm run dev
 ```
 Express app is listening on port 3000
 ```
-7. 於瀏覽器上輸入網址 URL
-http://localhost:3000
+7. 於瀏覽器上輸入網址 URL: http://localhost:3000
