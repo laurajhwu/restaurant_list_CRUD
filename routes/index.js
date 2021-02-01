@@ -11,5 +11,8 @@ router.use('/restaurants', restaurants);
 //search bar route
 const search = require('./modules/search');
 router.use('/search', search);
+//sorting function route
+const sort = require('./modules/sort');
+router.use('/sort', sort)
 
 module.exports = router

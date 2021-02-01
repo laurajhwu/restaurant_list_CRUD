@@ -40,20 +40,8 @@ app.listen(port, () => {
     console.log(`Express is listening to localhost:${port}`);
 })
 
-//DISPLAY CONTENT AND SET SEARCH BAR///////
 
-//order format
-app.get('/sort', (req, res) => {
-    const selection = req.query.sort.split('/');
-    const type = selection[0];
-    const order = selection[1];
-    let selected = { [`${type}_${order}`]: 'selected' }
-    return Restaurant.find()
-        .lean()
-        .sort({ [type]: [order] })
-        .then(restaurants => res.render('index', { restaurants, selected }))
-        .catch(error => console.log(error))
-})
+
 
 
 
