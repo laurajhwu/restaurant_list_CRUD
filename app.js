@@ -2,24 +2,16 @@
 //get and execute express 
 const express = require('express');
 const exphbr = require('express-handlebars');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const port = 3000;
-const Restaurant = require('./models/restaurant');
+
+const routes = require('./routes') // will auto get index.js
 
 const app = express();
 
-//from other files
-const routes = require('./routes') // will auto get index.js
-
-//connect to mongodb and store connection status
-mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection
-//show success and handle failures
-db.on('error', () => console.log('mongodb error!'));
-db.once('open', () => console.log('mongodb connected!'));
-
+// execute mongoose
+require('./config/mongoose');
 
 //set template engine
 app.engine('hbs', exphbr({ defaultLayout: 'main', extname: ".hbs" }));
@@ -31,7 +23,6 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }))
 //set method override
 app.use(methodOverride('_method'));
-
 //get routes
 app.use(routes);
 
