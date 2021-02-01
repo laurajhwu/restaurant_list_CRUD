@@ -35,10 +35,13 @@ app.listen(port, () => {
 //DISPLAY CONTENT AND SET SEARCH BAR///////
 //set route for index page (home page)
 app.get('/', (req, res) => {
+    //set default value for sort dropdown
+    const currentSelection = '請選則排列';
     //get all restaurant data and upload to index page
     return Restaurant.find()
         .lean()
-        .then(restaurants => res.render('index', { restaurants }))
+        .sort({ _id: 'asc' })
+        .then(restaurants => res.render('index', { restaurants, currentSelection }))
         .catch(error => console.log(error))
 })
 
@@ -111,6 +114,22 @@ app.post('/restaurants/:id/delete', (req, res) => {
     return Restaurant.findById(id)
         .then(restaurant => restaurant.remove())
         .then(() => res.redirect('/'))
+        .catch(error => console.log(error))
+})
+
+//order format
+app.get('/sort/:type/:order', (req, res) => {
+    const type = req.params.type
+    const order = req.params.order
+    const options = {
+        _idAsc: '請選則排列', nameAsc: '店名：A到Z', nameDesc: '店名：Z到A', categoryAsc: '類別',
+        ratingAsc: '評分：由低到高', ratingDesc: '評分：由高到低'
+    };
+    const currentSelection = options[type + order];
+    return Restaurant.find()
+        .lean()
+        .sort({ [type]: [order.toLowerCase()] })
+        .then(restaurants => res.render('index', { restaurants, currentSelection }))
         .catch(error => console.log(error))
 })
 

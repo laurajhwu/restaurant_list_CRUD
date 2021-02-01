@@ -49,7 +49,12 @@ header {
     box-shadow: none;
     border-color: #ced4da;
   }
-  
+
+  #dropdownMenuButton {
+    width: 200px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    height: 40px;
+  }
   .card {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   }
