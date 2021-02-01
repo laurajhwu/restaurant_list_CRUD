@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
 const Restaurant = require('../../models/restaurant');
 
 //set route for index page (home page)
