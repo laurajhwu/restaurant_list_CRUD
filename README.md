@@ -4,6 +4,8 @@
 ## Features - 產品功能
 - 使用者可以新增、瀏覽、修改、刪除自己喜愛的餐廳
 - 使用者可輸入餐廳的名字、英文名字、圖片、類別、地址、電話、評分、簡述等資訊
+- 使用者可看見餐廳的名字、圖片、類別、地址、電話、評分、簡述等資訊
+- 使用者可選擇餐廳排列順序
 
 ## Development Environment & Tools - 開發環境與工具
 - Node.js: v14.15.4
@@ -11,6 +13,7 @@
 - Express-Handlebars: v5.2.0
 - Body-Parser: v1.19.0
 - Mongoose: v5.11.13
+- Method-override: v3.0.0
 
 ## Database - 資料庫
 - Mongodb: v6.14.11
