@@ -6,7 +6,7 @@
                 <h4 class="mb-2">尋找餐廳：</h4>
                 <div class="input-group">
                     <input type="text" name="keyword" value="{{ keyword }}" class="form-control" placeholder="輸入餐廳、分類"
-                        aria-label="Restaurant Name..." value="" aria-describedby="search-button">
+                        aria-label="Restaurant Name..." aria-describedby="search-button">
                     <div class="input-group-append">
                         <button class="btn btn-major" type="submit" id="search-button"><i
                                 class="fas fa-search"></i></button>
@@ -23,21 +23,18 @@
 </div>
 
 {{!-- sort --}}
-<section class="container d-flex justify-content-end mt-2 mb-5 sort-options">
-    <div class="dropdown">
-        <button class="btn dropdown-toggle d-flex justify-content-between align-items-center" type="button"
-            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ currentSelection }}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/sort/_id/Asc">請選則排列</a>
-            <a class="dropdown-item" href="/sort/name/Asc">店名：A到Z</a>
-            <a class="dropdown-item" href="/sort/name/Desc">店名：Z到A</a>
-            <a class="dropdown-item" href="/sort/category/Asc">類別</a>
-            <a class="dropdown-item" href="/sort/rating/Desc">評分：由高到低</a>
-            <a class="dropdown-item" href="/sort/rating/Asc">評分：由低到高</a>
-        </div>
-    </div>
+<section class="container d-flex justify-content-end mt-4 mb-5 ps-1">
+    <form action="/sort" id="sort-dropdown">
+        {{!-- need to submit form with onchange="this.form.submit() --}}
+        <select class="form-control" name="sort" form="sort-dropdown" onchange="this.form.submit()">
+            <option value="_id/asc" {{#if selected._id_asc }} selected {{/if}}>請選則排列</option>
+            <option value="name/asc" {{#if selected.name_asc }} selected {{/if}}>店名：A到Z</option>
+            <option value="name/desc" {{#if selected.name_desc }} selected {{/if}}>店名：Z到A</option>
+            <option value="category/asc" {{#if selected.category_asc }} selected {{/if}}>類別</option>
+            <option value="rating/desc" {{#if selected.rating_desc }} selected {{/if}}>評分：由高到低</option>
+            <option value="rating/asc" {{#if selected.rating_asc }} selected {{/if}}>評分：由低到高</option>
+        </select>
+    </form>
 </section>
 
 

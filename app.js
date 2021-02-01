@@ -42,6 +42,18 @@ app.listen(port, () => {
 
 //DISPLAY CONTENT AND SET SEARCH BAR///////
 
+//order format
+app.get('/sort', (req, res) => {
+    const selection = req.query.sort.split('/');
+    const type = selection[0];
+    const order = selection[1];
+    let selected = { [`${type}_${order}`]: 'selected' }
+    return Restaurant.find()
+        .lean()
+        .sort({ [type]: [order] })
+        .then(restaurants => res.render('index', { restaurants, selected }))
+        .catch(error => console.log(error))
+})
 
 //set route for search bar
 app.get('/search', (req, res) => {
@@ -59,21 +71,7 @@ app.get('/search', (req, res) => {
         })
 })
 
-//order format
-app.get('/sort/:type/:order', (req, res) => {
-    const type = req.params.type
-    const order = req.params.order
-    const options = {
-        _idAsc: '請選則排列', nameAsc: '店名：A到Z', nameDesc: '店名：Z到A', categoryAsc: '類別',
-        ratingAsc: '評分：由低到高', ratingDesc: '評分：由高到低'
-    };
-    const currentSelection = options[type + order];
-    return Restaurant.find()
-        .lean()
-        .sort({ [type]: [order.toLowerCase()] })
-        .then(restaurants => res.render('index', { restaurants, currentSelection }))
-        .catch(error => console.log(error))
-})
+
 
 //CRUD SETTINGS/////////
 //Create: add your favorite restaurant to the list
