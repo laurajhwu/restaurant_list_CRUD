@@ -8,7 +8,7 @@
                         <small class="text-muted form-text px-2"><em>'*'為必填資料</em></small>
                     </div>
                     <hr>
-                    <form action="/restaurants/{{ restaurant._id }}/edit" method="POST" id="edit-form">
+                    <form action="/restaurants/{{ restaurant._id }}?_method=PUT" method="POST" id="edit-form">
                         <div class="form-group form-row">
                             <label for="name" class="col-md-4 col-form-label">餐廳名字*</label>
                             <div class="col-md-8">

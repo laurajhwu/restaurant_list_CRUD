@@ -1,12 +1,14 @@
 //GET MODULES, DATABASE, AND SET UP SERVER/////////
 //get and execute express 
 const express = require('express');
-const app = express();
 const exphbr = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const port = 3000;
 const Restaurant = require('./models/restaurant');
+
+const app = express();
 
 //from other files
 const routes = require('./routes') // will auto get index.js
@@ -18,8 +20,6 @@ const db = mongoose.connection
 db.on('error', () => console.log('mongodb error!'));
 db.once('open', () => console.log('mongodb connected!'));
 
-//set up body-parser
-app.use(bodyParser.urlencoded({ extended: true }))
 
 //set template engine
 app.engine('hbs', exphbr({ defaultLayout: 'main', extname: ".hbs" }));
@@ -27,6 +27,10 @@ app.set('view engine', 'hbs');
 
 //set up static files to access bootstrap and other designs
 app.use(express.static('public'));
+//set up body-parser
+app.use(bodyParser.urlencoded({ extended: true }))
+//set method override
+app.use(methodOverride('_method'));
 
 //get routes
 app.use(routes);
@@ -53,6 +57,22 @@ app.get('/search', (req, res) => {
             //get matches and create keyword variable to keep users' query
             res.render('index', { restaurants: restaurantFilter, keyword });
         })
+})
+
+//order format
+app.get('/sort/:type/:order', (req, res) => {
+    const type = req.params.type
+    const order = req.params.order
+    const options = {
+        _idAsc: '請選則排列', nameAsc: '店名：A到Z', nameDesc: '店名：Z到A', categoryAsc: '類別',
+        ratingAsc: '評分：由低到高', ratingDesc: '評分：由高到低'
+    };
+    const currentSelection = options[type + order];
+    return Restaurant.find()
+        .lean()
+        .sort({ [type]: [order.toLowerCase()] })
+        .then(restaurants => res.render('index', { restaurants, currentSelection }))
+        .catch(error => console.log(error))
 })
 
 //CRUD SETTINGS/////////
@@ -87,7 +107,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
         .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
     const id = req.params.id;
     const data = req.body;
     return Restaurant.findById(id)
@@ -103,7 +123,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 //Delete: delete restaurant feature
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
     const id = req.params.id;
     return Restaurant.findById(id)
         .then(restaurant => restaurant.remove())
@@ -111,21 +131,7 @@ app.post('/restaurants/:id/delete', (req, res) => {
         .catch(error => console.log(error))
 })
 
-//order format
-app.get('/sort/:type/:order', (req, res) => {
-    const type = req.params.type
-    const order = req.params.order
-    const options = {
-        _idAsc: '請選則排列', nameAsc: '店名：A到Z', nameDesc: '店名：Z到A', categoryAsc: '類別',
-        ratingAsc: '評分：由低到高', ratingDesc: '評分：由高到低'
-    };
-    const currentSelection = options[type + order];
-    return Restaurant.find()
-        .lean()
-        .sort({ [type]: [order.toLowerCase()] })
-        .then(restaurants => res.render('index', { restaurants, currentSelection }))
-        .catch(error => console.log(error))
-})
+
 
 
 

@@ -71,7 +71,7 @@
                     <a href="./restaurants/{{ this._id }}/edit">
                         <button type="button" class="btn btn-outline-warning btn-sm text-right mx-2">編輯</button>
                     </a>
-                    <form action="./restaurants/{{ this._id }}/delete" method="POST" class="d-inline">
+                    <form action="./restaurants/{{ this._id }}?_method=DELETE" method="POST" class="d-inline">
                         <button type="submit" class="btn"><i class="fas fa-trash-alt"></i></button>
                     </form>
                 </div>
