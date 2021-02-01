@@ -6,9 +6,10 @@ const exphbr = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const port = 3000;
-
 const Restaurant = require('./models/restaurant');
-const restaurant = require('./models/restaurant');
+
+//from other files
+const routes = require('./routes') // will auto get index.js
 
 //connect to mongodb and store connection status
 mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -27,23 +28,16 @@ app.set('view engine', 'hbs');
 //set up static files to access bootstrap and other designs
 app.use(express.static('public'));
 
+//get routes
+app.use(routes);
+
 //start server to listen
 app.listen(port, () => {
     console.log(`Express is listening to localhost:${port}`);
 })
 
 //DISPLAY CONTENT AND SET SEARCH BAR///////
-//set route for index page (home page)
-app.get('/', (req, res) => {
-    //set default value for sort dropdown
-    const currentSelection = '請選則排列';
-    //get all restaurant data and upload to index page
-    return Restaurant.find()
-        .lean()
-        .sort({ _id: 'asc' })
-        .then(restaurants => res.render('index', { restaurants, currentSelection }))
-        .catch(error => console.log(error))
-})
+
 
 //set route for search bar
 app.get('/search', (req, res) => {
